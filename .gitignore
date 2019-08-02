@@ -1,13 +1,15 @@
 .idea/
-composer.lock
 vendor/
 node_modules/
 npm-debug.log
 public/storage
 public/hot
 storage/*.key
+composer.lock
 .env.*.php
 .env.php
 .env
 Homestead.yaml
 Homestead.json
+yarn-error.log
+.phpunit.result.cache

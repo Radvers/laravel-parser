@@ -3,6 +3,7 @@ root = true
 
 # Для всех файлов используем unix-совместимые переносы строк
 [*]
+charset = utf-8
 end_of_line = lf
 insert_final_newline = true
 
@@ -10,3 +11,8 @@ insert_final_newline = true
 [*.php]
 indent_style = space
 indent_size = 4
+
+[*.yml]
+indent_size = 2
+
+
