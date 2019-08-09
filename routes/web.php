@@ -11,6 +11,13 @@
 |
 */
 
+use Illuminate\Support\Facades\Log;
+
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/debug-sentry', function () {
+    Log::debug('An informational message.', ['id' => 1]);
+    throw new Exception('My first Sentry error!');
+});
+Route::get('/parse', 'ParseController@index')->name('profile');
