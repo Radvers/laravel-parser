@@ -16,9 +16,12 @@ class PageParser
         $this->parser = $parser;
     }
 
+    /**
+     *
+     */
     public function parse()
     {
-        $output = $this->parser->getLinks2Films('http://baskino.me/page/1/');
+        $output = $this->parser->parse('http://baskino.me/page/1/');
         echo '<pre>';
         var_dump($output);
     }
