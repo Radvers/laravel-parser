@@ -2,28 +2,24 @@
 
 namespace App\Services;
 
-use App\Services\Parsers\Contracts\ParserInterface;
+use App\Contracts\ScenarioInterface;
 
 class PageParser
 {
     /**
-     * @var ParserInterface
+     * @var ScenarioInterface
      */
     private $parser;
 
-    public function __construct(ParserInterface $parser)
+    public function __construct(ScenarioInterface $parser)
     {
         $this->parser = $parser;
     }
 
-    /**
-     *
-     */
     public function parse()
     {
         $output = $this->parser->parse('http://baskino.me/page/1/');
-        echo '<pre>';
-        var_dump($output);
+        dd($output);
     }
 
 }

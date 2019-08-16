@@ -17,42 +17,86 @@ class MovieDTO
      */
     private $year;
     /**
-     * @var string
+     * @var array
      */
-    private $country;
+    private $producers;
+    /**
+     * @var array
+     */
+    private $genres;
     /**
      * @var string
      */
-    private $tagLine;
+    private $duration;
     /**
-     * @var string
-     */
-    private $producer;
-    /**
-     * @var string
-     */
-    private $genre;
-    /**
-     * @var string
-     */
-    private $time;
-    /**
-     * @var string
+     * @var array
      */
     private $actors;
 
 
-    public function __construct(array $movieInfo)
+    /**
+     * MovieDTO constructor.
+     * @param string $name
+     * @param string $originalName
+     * @param int $year
+     * @param string $duration
+     */
+    public function __construct(
+        string $name,
+        string $originalName,
+        int $year,
+        string $duration
+    ) {
+        $this->name = $name;
+        $this->originalName = $originalName;
+        $this->year = $year;
+        $this->duration = $duration;
+    }
+
+    /**
+     * @param array $fields
+     * @return MovieDTO
+     */
+    public static function createFromArray(array $fields): MovieDTO
     {
-        $this->name = $movieInfo[0];
-        $this->originalName = $movieInfo[1];
-        $this->year = (int)$movieInfo[2];
-        $this->country = $movieInfo[3];
-        $this->tagLine = $movieInfo[4];
-        $this->producer = $movieInfo[5];
-        $this->genre = $movieInfo[6];
-        $this->time = $movieInfo[7];
-        $this->actors = $movieInfo[8];
+        $movie = new self(
+            $fields['name'],
+            $fields['originalName'],
+            (int)$fields['year'],
+            $fields['duration']
+        );
+        foreach ($fields['producers'] as $name) {
+            $movie->addProducer(new ProducerDTO($name));
+        }
+        foreach ($fields['genres'] as $name) {
+            $movie->addGenre(new GenreDTO($name));
+        }
+        foreach ($fields['actors'] as $name) {
+            $movie->addActor(new ActorDTO($name));
+        }
+
+        return $movie;
+    }
+
+    /**
+     * @param ProducerDTO $producer
+     */
+    public function addProducer(ProducerDTO $producer): void
+    {
+        $this->producers[] = $producer;
+    }
+
+    public function addGenre(GenreDTO $genre): void
+    {
+        $this->genres[] = $genre;
+    }
+
+    /**
+     * @param ActorDTO $actor
+     */
+    public function addActor(ActorDTO $actor): void
+    {
+        $this->actors[] = $actor;
     }
 
     /**
@@ -80,46 +124,33 @@ class MovieDTO
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getCountry(): string
+    public function getProducers(): array
     {
-        return $this->country;
+        return $this->producers;
+    }
+
+    /**
+     * @return array
+     */
+    public function getGenres(): array
+    {
+        return $this->genres;
     }
 
     /**
      * @return string
      */
-    public function getTagLine(): string
+    public function getDuration(): string
     {
-        return $this->tagLine;
-    }
-
-    public function getProducer(): string
-    {
-        return $this->producer;
+        return $this->duration;
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getGenre(): string
-    {
-        return $this->genre;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTime(): string
-    {
-        return $this->time;
-    }
-
-    /**
-     * @return string
-     */
-    public function getActors(): string
+    public function getActors(): array
     {
         return $this->actors;
     }

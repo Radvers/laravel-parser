@@ -13,7 +13,8 @@ class ParserServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Services\Parsers\Contracts\ParserInterface', 'App\Services\Parsers\BaskinoParser');
+        $this->app->bind('App\Contracts\ScenarioInterface', 'App\Services\Scenarios\BaskinoScenario');
+        $this->app->bind('App\Contracts\ParserInterface', 'App\Adapters\ParserAdapter');
     }
 
     /**
