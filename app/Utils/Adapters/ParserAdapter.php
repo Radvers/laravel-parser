@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Adapters;
+namespace App\Utils\Adapters;
 
-use App\Contracts\ParserInterface;
+use App\Exceptions\ParserException;
+use App\Utils\Contracts\ParserInterface;
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -34,7 +35,7 @@ class ParserAdapter implements ParserInterface
      * @param array $whatExtract
      * @param string $method
      * @return array
-     * @throws \Exception
+     * @throws ParserException
      */
     public function sendAndExtract(string $url, string $selector, array $whatExtract, string $method = 'GET'): array
     {
@@ -52,18 +53,19 @@ class ParserAdapter implements ParserInterface
     public function sendRequest(string $url, string $method = 'GET'): void
     {
         $this->response = $this->client->request($method, $url);
+        dd($this->response);
     }
 
     /**
      * @param string $selector
      * @param array $whatExtract
      * @return array
-     * @throws \Exception
+     * @throws ParserException
      */
     public function extractFromRequest(string $selector, array $whatExtract): array
     {
         if (empty($this->response)) {
-            throw new \Exception("response wasn't send");
+            throw new ParserException();
         }
 
         return $this->response->filter($selector)->extract($whatExtract);
