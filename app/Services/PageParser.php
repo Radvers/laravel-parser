@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Contracts\ScenarioInterface;
+use App\Utils\Contracts\ScenarioInterface;
 
 class PageParser
 {

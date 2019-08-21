@@ -13,8 +13,9 @@ class ParserServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Contracts\ScenarioInterface', 'App\Services\Scenarios\BaskinoScenario');
-        $this->app->bind('App\Contracts\ParserInterface', 'App\Adapters\ParserAdapter');
+        $this->app->bind('App\Utils\Contracts\ScenarioInterface', 'App\Services\Scenarios\BaskinoScenario');
+        $this->app->bind('App\Utils\Contracts\ParserInterface', 'App\Utils\Adapters\ParserAdapter');
+        $this->app->bind('App\Utils\Contracts\ConfigLoaderInterface', 'App\Utils\Adapters\LaravelConfigLoader');
     }
 
     /**

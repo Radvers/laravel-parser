@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DTO;
+namespace App\Utils\DTO;
 
-class ProducerDTO
+class GenreDTO
 {
     /**
      * @var string
@@ -10,7 +10,7 @@ class ProducerDTO
     private $name;
 
     /**
-     * ProducerDTO constructor.
+     * GenreDTO constructor.
      * @param string $name
      */
     public function __construct(string $name)
