@@ -2,7 +2,7 @@
 
 namespace App\Utils\Contracts;
 
-interface ParserInterface
+interface Scrapper
 {
     /**
      * function find information on page using css selector and extract it to array

@@ -2,23 +2,28 @@
 
 namespace App\Utils\Adapters;
 
-use App\Exceptions\ConfigException;
-use App\Utils\Contracts\ConfigLoaderInterface;
+use App\Utils\Contracts\ConfigLoader;
+use Illuminate\Contracts\Config\Repository;
 
-class LaravelConfigLoader implements ConfigLoaderInterface
+class LaravelConfigLoader implements ConfigLoader
 {
+    /**
+     * @var Repository
+     */
+    private $repository;
+
+    public function __construct(Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * @param string $key
      * @return array
-     * @throws ConfigException
      */
     public function get(string $key): array
     {
-        $config =config($key);
-        if (empty($config)) {
-            throw new ConfigException();
-        }
 
-        return $config;
+        return $this->repository->get($key);
     }
 }

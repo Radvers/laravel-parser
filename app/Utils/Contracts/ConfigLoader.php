@@ -2,7 +2,7 @@
 
 namespace App\Utils\Contracts;
 
-interface ConfigLoaderInterface
+interface ConfigLoader
 {
     /**
      * @param string $key

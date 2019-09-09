@@ -1,15 +1,13 @@
 <?php
 
-
 namespace App\Exceptions;
-
 
 use Throwable;
 
 class ParserException extends \Exception
 {
-    public function __construct()
+    public static function emptyResponse()
     {
-        parent::__construct("You trying to extract data from empty response. Send request before.");
+        return new self("You trying to extract data from empty response. Send request before.");
     }
 }

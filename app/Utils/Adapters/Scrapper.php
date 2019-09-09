@@ -3,11 +3,11 @@
 namespace App\Utils\Adapters;
 
 use App\Exceptions\ParserException;
-use App\Utils\Contracts\ParserInterface;
+use App\Utils\Contracts\Scrapper as ScrapperInterface;
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
-class ParserAdapter implements ParserInterface
+class Scrapper implements ScrapperInterface
 {
     /**
      * @var Client
@@ -53,7 +53,6 @@ class ParserAdapter implements ParserInterface
     public function sendRequest(string $url, string $method = 'GET'): void
     {
         $this->response = $this->client->request($method, $url);
-        dd($this->response);
     }
 
     /**
@@ -67,8 +66,30 @@ class ParserAdapter implements ParserInterface
         if (empty($this->response)) {
             throw new ParserException();
         }
+        $crawler = $this->filterResponse($selector);
 
-        return $this->response->filter($selector)->extract($whatExtract);
+        return $this->extractFromResponse($crawler, $whatExtract);
+    }
+
+    /**
+     * @param string $selector
+     * @return Crawler
+     */
+    public function filterResponse(string $selector): Crawler
+    {
+
+        return $this->response->filter($selector);
+    }
+
+    /**
+     * @param Crawler $crawler
+     * @param array $whatExtract
+     * @return array
+     */
+    public function extractFromResponse(Crawler $crawler, array $whatExtract): array
+    {
+
+        return $crawler->extract($whatExtract);
     }
 
     /**

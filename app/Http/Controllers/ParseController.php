@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\PageParser;
+use App\Services\ParseService;
+use App\Utils\Parser\PageParser;
 
 class ParseController
 {
     /**
      * @var PageParser
      */
-    private $pageParser;
+    private $service;
 
-    public function __construct(PageParser $parser)
+    public function __construct(ParseService $service)
     {
-        $this->pageParser = $parser;
+        $this->service = $service;
     }
 
     public function index()
     {
-        $this->pageParser->parse();
+        $this->service->parse('http://baskino.me/page/1/');
     }
 }
