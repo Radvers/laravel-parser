@@ -13,6 +13,11 @@ return [
             'attribute' => '_text',
             'type' => 'text'
         ],
+        'description' => [
+            'cssSelector' => 'div[id^=news-id-]',
+            'attribute' => '_text',
+            'type' => 'text'
+        ],
         'originalName' => [
             'cssSelector' => '[itemprop=alternativeHeadline]',
             'attribute' => '_text',

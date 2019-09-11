@@ -13,13 +13,12 @@ class CreateGenresMoviesTable extends Migration
      */
     public function up()
     {
-        Schema::create('genres_movies', function (Blueprint $table) {
+        Schema::create('genre_movie', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('genre_id')->unsigned();
             $table->foreign('genre_id')->references('id')->on('genres');
             $table->bigInteger('movie_id')->unsigned();
             $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
@@ -30,6 +29,6 @@ class CreateGenresMoviesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genres_movies');
+        Schema::dropIfExists('genre_movie');
     }
 }

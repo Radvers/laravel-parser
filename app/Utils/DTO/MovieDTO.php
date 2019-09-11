@@ -2,12 +2,16 @@
 
 namespace App\Utils\DTO;
 
-class MovieDTO
+class MovieDTO extends DTO
 {
     /**
      * @var string
      */
     private $name;
+    /**
+     * @var string
+     */
+    private $description;
     /**
      * @var string
      */
@@ -19,11 +23,11 @@ class MovieDTO
     /**
      * @var array
      */
-    private $producers;
+    private $producers = [];
     /**
      * @var array
      */
-    private $genres;
+    private $genres = [];
     /**
      * @var string
      */
@@ -31,26 +35,36 @@ class MovieDTO
     /**
      * @var array
      */
-    private $actors;
+    private $actors = [];
+    /**
+     * @var string
+     */
+    private $url;
 
 
     /**
      * MovieDTO constructor.
      * @param string $name
+     * @param string $description
      * @param string $originalName
      * @param int $year
      * @param string $duration
+     * @param string $url
      */
     public function __construct(
         string $name,
+        string $description,
         string $originalName,
         int $year,
-        string $duration
+        string $duration,
+        string $url
     ) {
         $this->name = $name;
+        $this->description = $description;
         $this->originalName = $originalName;
         $this->year = $year;
         $this->duration = $duration;
+        $this->url = $url;
     }
 
     /**
@@ -61,9 +75,11 @@ class MovieDTO
     {
         $movie = new self(
             $fields['name'],
+            $fields['description'],
             $fields['originalName'],
             (int)$fields['year'],
-            $fields['duration']
+            $fields['duration'],
+            $fields['url']
         );
         foreach ($fields['producers'] as $name) {
             $movie->addProducer(new ProducerDTO($name));
@@ -76,6 +92,31 @@ class MovieDTO
         }
 
         return $movie;
+    }
+
+    /**
+     * extract dto fields to array
+     * @return array
+     */
+    public function extractToArray(): array
+    {
+        $arr['name'] = $this->getName();
+        $arr['description'] = $this->getDescription();
+        $arr['original_name'] = $this->getOriginalName();
+        $arr['year'] = $this->getYear();
+        $arr['duration'] = $this->getDuration();
+        $arr['url'] = $this->getUrl();
+
+        return $arr;
+    }
+
+    /**
+     * By this key data will be found in data storage
+     * @return string
+     */
+    public function getKey(): string
+    {
+        return $this->getName();
     }
 
     /**
@@ -105,6 +146,14 @@ class MovieDTO
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 
     /**
@@ -145,6 +194,14 @@ class MovieDTO
     public function getDuration(): string
     {
         return $this->duration;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 
     /**

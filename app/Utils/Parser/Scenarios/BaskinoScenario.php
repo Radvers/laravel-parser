@@ -59,7 +59,7 @@ class BaskinoScenario extends ParseScenario
     private function getMovieInfo(string $url): array
     {
         $config = $this->config->get(self::MOVIE);
-        $movieInfo = [];
+        $movieInfo['url'] = $url;
         $this->scrapper->sendRequest($url);
         foreach ($config as $key => $value) {
             $parseResult = $this->scrapper->extractFromRequest($value[self::SELECTOR], [$value[self::ATTRIBUTE]]);

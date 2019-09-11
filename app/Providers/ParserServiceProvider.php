@@ -4,12 +4,14 @@ namespace App\Providers;
 
 use App\Utils\Adapters\LaravelObjectCreator;
 use App\Utils\Contracts\ObjectCreator;
+use App\Utils\Contracts\Repository;
 use App\Utils\Parser\Scenarios\BaskinoScenario;
 use App\Utils\Adapters\LaravelConfigLoader;
 use App\Utils\Contracts\ConfigLoader;
 use App\Utils\Contracts\Scrapper as ScrapperInterface;
 use App\Utils\Contracts\Scenario;
 use App\Utils\Adapters\Scrapper;
+use App\Utils\Repositories\LaravelRepo;
 use Illuminate\Support\ServiceProvider;
 
 class ParserServiceProvider extends ServiceProvider
@@ -25,6 +27,7 @@ class ParserServiceProvider extends ServiceProvider
         $this->app->bind(ScrapperInterface::class, Scrapper::class);
         $this->app->bind(ConfigLoader::class, LaravelConfigLoader::class);
         $this->app->bind(ObjectCreator::class, LaravelObjectCreator::class);
+        $this->app->bind(Repository::class, LaravelRepo::class);
         //$this->app->when();
     }
 

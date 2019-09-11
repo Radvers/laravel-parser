@@ -13,13 +13,12 @@ class CreateMoviesProducersTable extends Migration
      */
     public function up()
     {
-        Schema::create('movies_producers', function (Blueprint $table) {
+        Schema::create('movie_producer', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('movie_id')->unsigned();
             $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade');
             $table->bigInteger('producer_id')->unsigned();
             $table->foreign('producer_id')->references('id')->on('producers');
-            $table->timestamps();
         });
     }
 
@@ -30,6 +29,6 @@ class CreateMoviesProducersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movies_producers');
+        Schema::dropIfExists('movie_producer');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Utils\Contracts\Repository;
 use App\Utils\Parser\PageParser;
 
 class ParseService
@@ -11,19 +12,25 @@ class ParseService
      */
     private $parser;
 
+    private $repository;
+
     /**
      * ParseService constructor.
      * @param PageParser $parser
+     * @param Repository $repository
      */
-    public function __construct(PageParser $parser)
+    public function __construct(PageParser $parser, Repository $repository)
     {
         $this->parser = $parser;
+        $this->repository = $repository;
     }
 
     public function parse(string $url)
     {
-        $result = $this->parser->parse($url);
-        dd($result);
+        $movies = $this->parser->parse($url);
+        $this->repository->storeAll($movies);
+
+        dd($movies);
     }
 
 

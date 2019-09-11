@@ -27,7 +27,6 @@ class PageParser
         $source = $this->getSourceName($url);
         $parser = $this->manager->getScenario($source);
         $output = $parser->parse($url);
-        dd($output);
 
         return $output;
     }
