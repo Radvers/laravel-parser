@@ -3,10 +3,10 @@
 
 namespace App\Utils\Repositories;
 
-use App\Models\Genre;
-use App\Models\Movie;
-use App\Models\Actor;
-use App\Models\Producer;
+use App\Utils\Repositories\Laravel\Models\Genre;
+use App\Utils\Repositories\Laravel\Models\Movie;
+use App\Utils\Repositories\Laravel\Models\Actor;
+use App\Utils\Repositories\Laravel\Models\Producer;
 use App\Utils\Contracts\ObjectCreator;
 use App\Utils\Contracts\Repository;
 use App\Utils\DTO\DTO;
@@ -47,7 +47,7 @@ class LaravelRepo implements Repository
      */
     public function __construct(Movie $movie, Actor $actor, Genre $genre, Producer $producer, ObjectCreator $creator)
     {
-        $this->movie = $movie;
+        $this->movie = $movie->getName();
         $this->actor = $actor;
         $this->genre = $genre;
         $this->producer = $producer;
@@ -90,7 +90,10 @@ class LaravelRepo implements Repository
     {
         foreach ($actors as $actor) {
             $attachment = $this->getModel($this->actor, 'name', $actor);
-            $movie->actors()->attach($attachment->getKey());
+            /**
+             * @var $movie Movie
+             */
+            $movie->getActors()->attach($attachment->getKey());
         }
 
         return $movie;

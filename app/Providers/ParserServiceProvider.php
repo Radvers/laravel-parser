@@ -27,7 +27,7 @@ class ParserServiceProvider extends ServiceProvider
         $this->app->bind(ScrapperInterface::class, Scrapper::class);
         $this->app->bind(ConfigLoader::class, LaravelConfigLoader::class);
         $this->app->bind(ObjectCreator::class, LaravelObjectCreator::class);
-        $this->app->bind(Repository::class, LaravelRepo::class);
+
         //$this->app->when();
     }
 

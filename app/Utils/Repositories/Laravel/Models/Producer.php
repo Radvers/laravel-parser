@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Utils\Repositories\Laravel\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class Genre extends Model
+class Producer extends Model
 {
     protected $fillable = [
         'name'
