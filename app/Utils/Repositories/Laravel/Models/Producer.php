@@ -7,23 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producer extends Model
 {
+    public const NAME = 'name';
+
     protected $fillable = [
-        'name'
+        self::NAME
     ];
 
     public function movies()
     {
-        return $this->belongsToMany('App\Models\Movie');
-    }
-
-    /**
-     * @param Builder $query
-     * @param string $field
-     * @param $value
-     * @return mixed
-     */
-    public function scopeByField(Builder $query, string $field, $value)
-    {
-        return $query->where($field, $value);
+        return $this->belongsToMany(Movie::class);
     }
 }

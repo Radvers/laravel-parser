@@ -2,7 +2,7 @@
 
 namespace App\Utils\Repositories\Laravel\Criteria;
 
-use App\Utils\Repositories\Contracts\CriteriaDictionary;
+use App\Utils\Repositories\Laravel\Criteria\Dictionaries\CriteriaDictionary;
 use App\Utils\Repositories\Contracts\Criterion;
 use Illuminate\Database\Eloquent\Builder;
 

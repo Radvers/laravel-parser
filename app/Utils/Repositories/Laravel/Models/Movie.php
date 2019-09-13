@@ -2,7 +2,6 @@
 
 namespace App\Utils\Repositories\Laravel\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**

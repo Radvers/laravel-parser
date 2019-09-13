@@ -4,7 +4,8 @@ namespace App\Services;
 
 use App\Utils\Contracts\Repository\Movie;
 use App\Utils\Parser\PageParser;
-use App\Utils\Repositories\Contracts\CriteriaDictionary;
+use App\Utils\Repositories\Laravel\Criteria\Dictionaries\CriteriaDictionary;
+use App\Utils\Repositories\Laravel\QueryObjects\GetByYearName;
 
 class ParseService
 {
@@ -32,8 +33,8 @@ class ParseService
     public function parse(string $url)
     {
         //$movies = $this->parser->parse($url);
-        $repo = $this->movie->getByYear(2019);
-        //->add($name, $value)
+        $query = new GetByYearName(2019, 'Код молодости');
+        $repo = $this->movie->findSingleBy($query);
 
         dd($repo);
         /*foreach ($movies as $movie) {

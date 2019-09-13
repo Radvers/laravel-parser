@@ -2,7 +2,9 @@
 
 namespace App\Utils\Contracts\Repository;
 
+use App\Utils\Contracts\Queryable;
+
 interface Movie
 {
-    public function getByYear(int $year);
+    public function findSingleBy(Queryable $query);
 }

@@ -3,6 +3,7 @@
 
 namespace App\Utils\Repositories\Laravel;
 
+use App\Utils\Contracts\Queryable;
 use App\Utils\Repositories\Contracts\Criterion;
 use App\Utils\Repositories\Contracts\Repository;
 use Illuminate\Database\Eloquent\Model;
@@ -35,16 +36,10 @@ abstract class BaseRepository implements Repository
         $this->builder = $this->model->newQuery();
     }
 
-    /**
-     * @param Model $model
-     * @return bool
-     */
-    abstract protected function isSatisfy(Model $model): bool;
-
-    public function findSingleBy(array $criteria): ?Model
+    public function findSingleBy(Queryable $query): ?Model
     {
         $this->refreshBuilder();
-        $this->pushCriteria($criteria);
+        $this->pushCriteria($query);
         $this->applyCriteria();
 
         return $this->builder->first();
@@ -60,9 +55,9 @@ abstract class BaseRepository implements Repository
         $this->builder->newQuery();
     }
 
-    private function pushCriteria(array $criteria)
+    private function pushCriteria(Queryable $query)
     {
-        foreach ($criteria as $criterion => $value) {
+        foreach ($query->getCriteria() as $criterion => $value) {
             $this->criteria[] = $this->buildCriterion($criterion, $value);
         }
     }
